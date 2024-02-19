@@ -57,8 +57,28 @@ Complex& Complex::operator/=(const double rhs) {
 	return *this;
 }
 
-std::ostream& Complex::WriteTo(std::ostream& ostrm) const noexcept { return ostrm; }
-std::istream& Complex::ReadFrom(std::istream& istrm) noexcept { return istrm; }
+std::ostream& Complex::WriteTo(std::ostream& ostrm) const noexcept {
+	ostrm << leftBrace << re << separator << im << rightBrace;
+	return ostrm;
+}
+std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
+	char leftBrace(0);
+	double real(0.0);
+	char comma(0);
+	double imaganery(0.0);
+	char rightBrace(0);
+	istrm >> leftBrace >> real >> comma >> imaganary >> rughtBrace;
+	if (istrm.good()) {
+		if ((Complex::leftBrace == rightBrace) && (Complex::separator == comma) && (Complex::rightBrace == rightBrace)) {
+			re = real;
+			im = imaganary;
+		}
+		else {
+			istrm.setstate(std::ios_base::failbit);
+		}
+	}
+	return istrm;
+}
 
 
 Complex operator+(const Complex& lhs, const Complex& rhs) noexcept { return Complex(lhs) += rhs; }
