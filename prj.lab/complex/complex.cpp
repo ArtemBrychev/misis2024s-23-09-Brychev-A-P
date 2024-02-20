@@ -1,11 +1,11 @@
 // 2022 by Polevoi Dmitry under Unlicense
-#include <complex/complex.hpp>
+#include "complex.hpp"
 #include <cmath>
 
 Complex Complex::operator-() const noexcept { return Complex(-re, -im); }
 
 bool Complex::operator==(const Complex& rhs) const noexcept {
-	if (this->re == rhs.re and this->im == rhs.im) {
+	if ((this->re == rhs.re) && (this->im == rhs.im)) {
 		return true;
 	}
 	else {
@@ -13,7 +13,7 @@ bool Complex::operator==(const Complex& rhs) const noexcept {
 	}
 }
 bool Complex::operator!=(const Complex& rhs) const noexcept {
-	if (this->re == rhs.re and this->im == rhs.im) {
+	if (this->re == rhs.re && this->im == rhs.im) {
 		return false;
 	}
 	else {
@@ -56,7 +56,7 @@ Complex& Complex::operator/=(const double rhs) {
 	this->im = this->im / rhs;
 	return *this;
 }
-
+/*
 std::ostream& Complex::WriteTo(std::ostream& ostrm) const noexcept {
 	ostrm << leftBrace << re << separator << im << rightBrace;
 	return ostrm;
@@ -67,11 +67,11 @@ std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
 	char comma(0);
 	double imaganery(0.0);
 	char rightBrace(0);
-	istrm >> leftBrace >> real >> comma >> imaganary >> rughtBrace;
+	istrm >> leftBrace >> real >> comma >> imaganery >> rightBrace;
 	if (istrm.good()) {
 		if ((Complex::leftBrace == rightBrace) && (Complex::separator == comma) && (Complex::rightBrace == rightBrace)) {
 			re = real;
-			im = imaganary;
+			im = imaganery;
 		}
 		else {
 			istrm.setstate(std::ios_base::failbit);
@@ -79,6 +79,7 @@ std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
 	}
 	return istrm;
 }
+*/
 
 
 Complex operator+(const Complex& lhs, const Complex& rhs) noexcept { return Complex(lhs) += rhs; }
