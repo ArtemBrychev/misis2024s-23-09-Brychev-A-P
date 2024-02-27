@@ -5,5 +5,3 @@ target_include_directories(complex PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 install(TARGETS complex)
-project (theproject)
-add_executable (thetarget main.cpp)
