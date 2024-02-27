@@ -36,8 +36,10 @@ Complex& Complex::operator-=(const Complex& rhs) noexcept {
 Complex& Complex::operator-=(const double rhs) noexcept { return operator-=(Complex(rhs)); }
 
 Complex& Complex::operator*=(const Complex& rhs) noexcept {
-	this->re  = this->re * rhs.re - this->im * rhs.im;
-	this->im = this->re * rhs.im + this->im * rhs.re;
+	double a = this->re;
+	double b = this->im;
+	this->re  = a * rhs.re - b * rhs.im;
+	this->im = a * rhs.im + b * rhs.re;
 	return *this;
 }
 Complex& Complex::operator*=(const double rhs) noexcept {
@@ -47,8 +49,10 @@ Complex& Complex::operator*=(const double rhs) noexcept {
 }
 
 Complex& Complex::operator/=(const Complex& rhs) {
-	this->re = (this->re * rhs.re + this->im * rhs.im) / (pow(rhs.re, 2) + pow(rhs.im, 2));
-	this->im = (this->im * rhs.re - this->re * rhs.im) / (pow(rhs.re, 2) + pow(rhs.im, 2));
+	double a = this->re;
+	double b = this->im;
+	this->re = (a * rhs.re + b * rhs.im) / (pow(rhs.re, 2) + pow(rhs.im, 2));
+	this->im = (b * rhs.re - a * rhs.im) / (pow(rhs.re, 2) + pow(rhs.im, 2));
 	return *this;
 }
 Complex& Complex::operator/=(const double rhs) {
