@@ -1,6 +1,7 @@
 // 2022 by Polevoi Dmitry under Unlicense
 #include "complex.hpp"
 #include <cmath>
+#include <iostream>
 
 Complex Complex::operator-() const noexcept { return Complex(-re, -im); }
 
@@ -60,7 +61,7 @@ Complex& Complex::operator/=(const double rhs) {
 	this->im = this->im / rhs;
 	return *this;
 }
-/*
+
 std::ostream& Complex::WriteTo(std::ostream& ostrm) const noexcept {
 	ostrm << leftBrace << re << separator << im << rightBrace;
 	return ostrm;
@@ -83,7 +84,7 @@ std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
 	}
 	return istrm;
 }
-*/
+
 
 
 Complex operator+(const Complex& lhs, const Complex& rhs) noexcept { return Complex(lhs) += rhs; }
