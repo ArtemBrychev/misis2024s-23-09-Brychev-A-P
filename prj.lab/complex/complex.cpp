@@ -2,6 +2,8 @@
 #include "complex.hpp"
 #include <cmath>
 #include <iostream>
+#include <sstream>
+
 
 Complex Complex::operator-() const noexcept { return Complex(-re, -im); }
 
@@ -50,10 +52,15 @@ Complex& Complex::operator*=(const double rhs) noexcept {
 }
 
 Complex& Complex::operator/=(const Complex& rhs) {
-	double a = this->re;
-	double b = this->im;
-	this->re = (a * rhs.re + b * rhs.im) / (pow(rhs.re, 2) + pow(rhs.im, 2));
-	this->im = (b * rhs.re - a * rhs.im) / (pow(rhs.re, 2) + pow(rhs.im, 2));
+	if (rhs.re == 0 && rhs.im == 0) {
+		throw std::runtime_error("Div by zero");
+	}
+	else {
+		auto real = float(re * rhs.re + im * rhs.im) / (rhs.re * rhs.re + rhs.im * rhs.im);
+		auto imagin = float(im * rhs.re - re * rhs.im) / (rhs.re * rhs.re + rhs.im * rhs.im);
+		re = real;
+		im = imagin;
+	}
 	return *this;
 }
 Complex& Complex::operator/=(const double rhs) {

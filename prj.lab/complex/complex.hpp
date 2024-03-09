@@ -4,6 +4,7 @@
 #define COMPLEX_COMPLEX_H_20191010
 
 #include <iosfwd>
+#include <sstream>
 
 //! \class Complex complex.hpp complex/complex.hpp
 //! \brief Комплексные числа.

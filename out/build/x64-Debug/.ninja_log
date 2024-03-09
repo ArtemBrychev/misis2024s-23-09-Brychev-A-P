@@ -1,0 +1,11 @@
+# ninja log v5
+14	686	7317206584313365	prj.test/CMakeFiles/test_complex.dir/test_complex.cpp.obj	3daa6d7d5c12944e
+2	995	7317206587457272	prj.lab/complex/CMakeFiles/complex.dir/complex.cpp.obj	5de0d04b7334e7d6
+995	1071	7317206587940972	prj.lab/complex/complex.lib	379ba92fcf80cd97
+1071	1340	7317206590007465	C:/Users/HP/misis2024s-23-09-Brychev-A-P/bin.dbg/test_complex.exe	dd1c522333cfb43
+8	707	7317206584538584	prj.lab/rational/CMakeFiles/rational.dir/rational.cpp.obj	5eef10d4763eaaf5
+707	810	7317206585412771	prj.lab/rational/rational.lib	fb5a196d2636cddb
+3	714	7317235578575594	prj.lab/rational/CMakeFiles/rational.dir/rational.cpp.obj	5eef10d4763eaaf5
+715	796	7317235579318485	prj.lab/rational/rational.lib	fb5a196d2636cddb
+12	1472	7317235586192260	prj.test/CMakeFiles/test_rational.dir/test_rational.cpp.obj	3046dbd6fa88a781
+1472	2399	7317235594492073	C:/Users/HP/misis2024s-23-09-Brychev-A-P/bin.dbg/test_rational.exe	3199094b7041768b
