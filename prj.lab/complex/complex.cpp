@@ -81,7 +81,7 @@ std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
 	char rightBrace(0);
 	istrm >> leftBrace >> real >> comma >> imaganery >> rightBrace;
 	if (istrm.good()) {
-		if ((Complex::leftBrace == rightBrace) && (Complex::separator == comma) && (Complex::rightBrace == rightBrace)) {
+		if ((Complex::leftBrace == leftBrace) && (Complex::separator == comma) && (Complex::rightBrace == rightBrace)) {
 			re = real;
 			im = imaganery;
 		}
