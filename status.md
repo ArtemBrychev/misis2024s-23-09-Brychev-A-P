@@ -1,8 +1,4 @@
-CHECK: 20240310-205551
-OK: folder prj.codeforces structure is correct
-ERROR: file prj.codeforces/CMakeLists.txt is absent
-OK: CMake generator successed
-OK: CMake build (MSVC x64) successed
+CHECK: 20240312-185100
 STATUS: lab complex - test-failed
 STATUS: lab complex_io - test-ok
 STATUS: lab complex_m - test-ok
