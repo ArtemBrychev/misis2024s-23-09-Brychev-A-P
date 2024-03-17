@@ -1,4 +1,3 @@
-// 2022 by Polevoi Dmitry under Unlicense
 #include "complex.hpp"
 #include <cmath>
 #include <iostream>
@@ -7,31 +6,14 @@
 
 Complex Complex::operator-() const noexcept { return Complex(-re, -im); }
 
-bool Complex::operator==(const Complex& rhs) const noexcept {
-	if ((this->re == rhs.re) && (this->im == rhs.im)) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-bool Complex::operator!=(const Complex& rhs) const noexcept {
-	if (this->re == rhs.re && this->im == rhs.im) {
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-
 Complex& Complex::operator+=(const Complex& rhs) noexcept {
-	this->re  = this->re  + rhs.re;
+	this->re = this->re + rhs.re;
 	this->im = this->im + rhs.im;
 	return *this;
 }
 Complex& Complex::operator+=(const double rhs) noexcept { return operator+=(Complex(rhs)); }
 
-Complex& Complex::operator-=(const Complex& rhs) noexcept { 
+Complex& Complex::operator-=(const Complex& rhs) noexcept {
 	this->re = this->re - rhs.re;
 	this->im = this->im - rhs.im;
 	return *this;
@@ -41,7 +23,7 @@ Complex& Complex::operator-=(const double rhs) noexcept { return operator-=(Comp
 Complex& Complex::operator*=(const Complex& rhs) noexcept {
 	double a = this->re;
 	double b = this->im;
-	this->re  = a * rhs.re - b * rhs.im;
+	this->re = a * rhs.re - b * rhs.im;
 	this->im = a * rhs.im + b * rhs.re;
 	return *this;
 }
@@ -64,9 +46,16 @@ Complex& Complex::operator/=(const Complex& rhs) {
 	return *this;
 }
 Complex& Complex::operator/=(const double rhs) {
-	this->re = this->re / rhs;
-	this->im = this->im / rhs;
+	if (rhs == 0) {
+		throw std::runtime_error("Div by zero");
+	}
+	else {
+		this->re = this->re / rhs;
+		this->im = this->im / rhs;
+		return *this;
+	}
 	return *this;
+
 }
 
 std::ostream& Complex::WriteTo(std::ostream& ostrm) const noexcept {
@@ -92,7 +81,9 @@ std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
 	return istrm;
 }
 
-
+void Complex::conjugate() {
+	im *= -1;
+}
 
 Complex operator+(const Complex& lhs, const Complex& rhs) noexcept { return Complex(lhs) += rhs; }
 Complex operator+(const Complex& lhs, const double rhs) noexcept { return Complex(lhs) += rhs; }
