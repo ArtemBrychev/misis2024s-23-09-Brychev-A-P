@@ -6,6 +6,8 @@
 
 #include <cstdint>
 #include <iosfwd>
+#include <sstream>
+
 
 class Rational {
 public:
@@ -39,6 +41,8 @@ public:
   Rational& operator-=(const int64_t rhs) noexcept;
   Rational& operator*=(const int64_t rhs) noexcept;
   Rational& operator/=(const int64_t rhs);
+
+  static const char separator{ '/' };
 
   //! \brief Форматированный вывод в поток ostrm рационального числа в виде num/den.
   //!

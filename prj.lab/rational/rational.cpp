@@ -2,6 +2,8 @@
 #include <rational/rational.hpp>
 
 #include <stdexcept>
+#include <iostream>
+#include <sstream>
 
 int64_t nod(int64_t a, int64_t b) {
     while (a && b)
@@ -116,7 +118,32 @@ Rational operator-(const int64_t lhs, const Rational& rhs) noexcept { return ope
 Rational operator*(const int64_t lhs, const Rational& rhs) noexcept { return operator+(rhs, lhs); }
 Rational operator/(const int64_t lhs, const Rational& rhs) { return operator+(rhs, lhs); }
 
+std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
+    std::int64_t numerator(0);
+    char comma(0);
+    std::int64_t denominator(0);
+    istrm >> numerator >> comma >> denominator;
+    if (istrm.good()) {
+        if ((Rational::separator == comma)) {
+            num_ = numerator;
+            den_ = denominator;
+        }
+        else {
+            istrm.setstate(std::ios_base::failbit);
+        }
+    }
+    return istrm;
+}
 
-std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept { return ostrm; }
+std::ostream& Rational::WriteTo(std::ostream& ostrm) const noexcept {
+    ostrm << num_  << separator << den_;
+    return ostrm;
+}
 
-std::istream& operator>>(std::istream& istrm, Rational& rhs) noexcept { return istrm; }
+std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept {
+    return rhs.WriteTo(ostrm);
+}
+
+std::istream& operator>>(std::istream& istrm, Rational& rhs) noexcept {
+    return rhs.ReadFrom(istrm);
+}
