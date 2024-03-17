@@ -3,7 +3,7 @@
 ///#include "doctest.h"
 #include <rational/rational.hpp>
 
-/*
+
 TEST_CASE("rational ctor") {
   Rational r_def;
   CHECK(0 == r_def.num());
@@ -14,10 +14,15 @@ TEST_CASE("rational ctor") {
   CHECK(1 == r_int.den());
 
   CHECK_THROWS(void(Rational(1, 0)));
-}*/
+}
 
 int main(){
-	Rational r;
-	std::cin >> r;
-	std::cout << r;
+	Rational r(4);
+	Rational g;
+	///std::cin >> r;
+	std::cin >> g;
+	std::cout << r << '+' << g << '=' << r+g << std::endl;
+	std::cout << r << '-' << g << '=' << r-g << std::endl;
+	std::cout << r << '*' << g << '=' << r*g << std::endl;
+	std::cout << r << '/' << g << '=' << r/g << std::endl;
 }

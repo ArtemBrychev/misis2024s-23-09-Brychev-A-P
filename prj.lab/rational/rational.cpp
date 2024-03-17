@@ -89,12 +89,17 @@ Rational& Rational::operator*=(const Rational& rhs) noexcept {
     this->den_ = d / nod(n, d);
     return *this;
 };
-Rational& Rational::operator/=(const Rational& rhs) { 
-    int64_t n = this->num_ * rhs.den_;
-    int64_t d = this->den_ * rhs.num_;
-    this->num_ = n / nod(n, d);
-    this->den_ = d / nod(n, d);
-    return *this;
+Rational& Rational::operator/=(const Rational& rhs) {
+    if (rhs.num_ != 0) {
+        int64_t n = this->num_ * rhs.den_;
+        int64_t d = this->den_ * rhs.num_;
+        this->num_ = n / nod(n, d);
+        this->den_ = d / nod(n, d);
+        return *this;
+    }
+    else {
+        throw std::invalid_argument("Dividing by zero");
+    }
 };
 
 Rational& Rational::operator+=(const int64_t rhs) noexcept { return operator+=(Rational(rhs)); };
@@ -124,9 +129,12 @@ std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
     std::int64_t denominator(0);
     istrm >> numerator >> comma >> denominator;
     if (istrm.good()) {
-        if ((Rational::separator == comma)) {
+        if ((Rational::separator == comma) and (denominator != 0)) {
             num_ = numerator;
             den_ = denominator;
+        }
+        else if (denominator == 0) {
+            throw std::invalid_argument("Zero denumenator in Rational ctor");
         }
         else {
             istrm.setstate(std::ios_base::failbit);
