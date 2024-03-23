@@ -3,6 +3,7 @@
 
 #include <iosfwd>
 #include <sstream>
+#include <limits>
 #include <cmath>
 
 //! \class Complex complex.hpp complex/complex.hpp

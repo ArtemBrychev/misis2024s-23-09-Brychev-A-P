@@ -1,5 +1,3 @@
-// 2023 by Polevoi Dmitry under Unlicense
-
 #pragma once
 #ifndef RATIONAL_RATIONAL_HPP_20231113
 #define RATIONAL_RATIONAL_HPP_20231113

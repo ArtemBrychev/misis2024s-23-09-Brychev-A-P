@@ -4,7 +4,6 @@
 #include <sstream>
 
 int main() {
-	Complex c;
-	std::cin >> c;
-	std::cout << c;
+	Complex c(5, 7);
+	std::cout << -c;
 }

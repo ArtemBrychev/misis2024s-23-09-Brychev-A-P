@@ -1,4 +1,3 @@
-// 2023 by Polevoi Dmitry under Unlicense
 #include <rational/rational.hpp>
 
 #include <stdexcept>
@@ -6,16 +5,35 @@
 #include <sstream>
 
 int64_t nod(int64_t a, int64_t b) {
-    while (a && b)
-        if (a > b) a %= b;
-        else b %= a;
-    return a + b;
+    if (a < 0) {
+        a = a * -1;
+        while (a && b)
+            if (a > b) a %= b;
+            else b %= a;
+        return a + b;
+    }
+    else {
+        while (a && b)
+            if (a > b) a %= b;
+            else b %= a;
+        return a + b;
+    }
 }
 
-Rational::Rational(const std::int64_t num, const std::int64_t den)
-  : num_(num), den_(den) {
+Rational::Rational(const std::int64_t num, const std::int64_t den):num_(num), den_(den)
+{
   if (0 == den_) {
     throw std::invalid_argument("Zero denumenator in Rational ctor");
+  }
+  else {
+      if (den < 0) {
+          num_ = -1 * num;
+          den_ = -1 * den;
+      }
+      else {
+          num_ = num;
+          den_ = den;
+      }
   }
 }
 
@@ -130,8 +148,10 @@ std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
     istrm >> numerator >> comma >> denominator;
     if (istrm.good()) {
         if ((Rational::separator == comma) and (denominator != 0)) {
+            //std::cout << numerator << comma << denominator;
             num_ = numerator;
             den_ = denominator;
+            //std::cout << this->num_ << " " << this->den_;
         }
         else if (denominator == 0) {
             throw std::invalid_argument("Zero denumenator in Rational ctor");
@@ -144,8 +164,14 @@ std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
 }
 
 std::ostream& Rational::WriteTo(std::ostream& ostrm) const noexcept {
-    ostrm << num_  << separator << den_;
-    return ostrm;
+    if (num_ >= 0) {
+        ostrm << num_ << separator << den_;
+        return ostrm;
+    }
+    else {
+        ostrm << num_ << separator << den_;
+        return ostrm;
+    }
 }
 
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept {

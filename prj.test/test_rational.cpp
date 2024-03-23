@@ -16,13 +16,46 @@ TEST_CASE("rational ctor") {
   CHECK_THROWS(void(Rational(1, 0)));
 }
 
-int main(){
-	Rational r(4);
-	Rational g;
-	///std::cin >> r;
-	std::cin >> g;
-	std::cout << r << '+' << g << '=' << r+g << std::endl;
-	std::cout << r << '-' << g << '=' << r-g << std::endl;
-	std::cout << r << '*' << g << '=' << r*g << std::endl;
-	std::cout << r << '/' << g << '=' << r/g << std::endl;
+TEST_CASE("Small functions") {
+	Rational r(-5, 7);
+	CHECK(-5 == r.num());
+	CHECK(7 == r.den());
+
+	Rational h(5, -7);
+	CHECK(-5 == h.num());
+	CHECK(7 == h.den());
+	///Нужно внести сокращение дроби при создании или вводе, инкремент, декремент, посмотреть что там со сравнением.
 }
+
+TEST_CASE("aritmetics with positive numbers") {
+	Rational t(6,  7);
+	Rational h(4, 5);
+	CHECK(t + h == Rational(58,35));
+	CHECK(t - h == Rational(2, 35));
+	CHECK(t * h == Rational(24, 35));
+	CHECK(t / h == Rational(15, 14));
+	t += h;
+	CHECK(t == Rational(58, 35));
+	///Реализовать операторы -=, +=, *=, /= для всех видов арифметики как написано выше(Только для тестов).
+}
+
+TEST_CASE("aritmetics with negative numbers") {
+	Rational t(-6, 7);
+	Rational h(4, 5);
+	CHECK(t + h == Rational(2, 35));
+	CHECK(t - h == Rational(-58, 35));
+	CHECK(t * h == Rational(-24, 35));
+	CHECK(t / h == Rational(-15, 14));
+}
+
+//TEST_CASE("Rational input/output") {
+//	Rational t(1, 2);
+//	std::ostringstream output;
+//	output << t;
+//	CHECK(output.str() == "1/2");
+//	Rational m;
+//	std::istringstream input("5");
+//	input >> m;
+//	CHECK(m == Rational(5, 3));
+//}
+
