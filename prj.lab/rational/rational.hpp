@@ -40,6 +40,14 @@ public:
   Rational& operator*=(const int64_t rhs) noexcept;
   Rational& operator/=(const int64_t rhs);
 
+  Rational& operator++();
+
+  Rational& operator++(int);
+
+  Rational& operator--();
+
+  Rational& operator--(int);
+
   static const char separator{ '/' };
 
   //! \brief Форматированный вывод в поток ostrm рационального числа в виде num/den.
@@ -51,7 +59,7 @@ public:
   //! \brief Форматированный ввод из потока istrm комплексного числа в виде num/den.
   //!
   //! \param[in,out] istrm - поток
-  //! \retval поток
+  //! \retval потокм
   std::istream& ReadFrom(std::istream& istrm) noexcept;
 
 private:
@@ -73,6 +81,8 @@ private:
 [[nodiscard]] Rational operator-(const int64_t lhs, const Rational& rhs) noexcept;
 [[nodiscard]] Rational operator*(const int64_t lhs, const Rational& rhs) noexcept;
 [[nodiscard]] Rational operator/(const int64_t lhs, const Rational& rhs);
+
+
 
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept;
 

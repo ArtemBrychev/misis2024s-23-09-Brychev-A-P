@@ -3,15 +3,6 @@
 #include "doctest.h"
 #include <rational/rational.hpp>
 
-//int main() {
-//	Rational h;
-//	Rational j(4, 5);
-//	std::cout << h << " - " << h.num() << ' ' << h.den() << std::endl;
-//	std::cout << h * j;
-//	h += j;
-//	std::cout << std::endl << h;
-//}
-
 
 TEST_CASE("rational ctor") {
   Rational r_def;
@@ -37,7 +28,22 @@ TEST_CASE("Small functions") {
 	Rational k(5, 20);
 	CHECK(1 == k.num());
 	CHECK(4 == k.den());
-	///Нужно внести сокращение дроби при создании или вводе, инкремент, декремент, посмотреть что там со сравнением.
+}
+
+TEST_CASE("Even") {
+	CHECK(Rational(-6, 7) == Rational(12, -14));
+	CHECK(Rational(3, 4) < Rational(5, 6));
+	CHECK(Rational(3, 4) <= Rational(5, 6));
+	CHECK(Rational(5, 6) > Rational(3, 4));
+	CHECK(Rational(5, 6) >= Rational(3, 4));
+	CHECK(Rational(3, 4) > Rational(-5, 6));
+	CHECK(Rational(3, 4) >= Rational(-5, 6));
+	CHECK(Rational(-5, 6) < Rational(3, 4));
+	CHECK(Rational(-5, 6) <= Rational(3, 4));
+	CHECK(Rational(-3, 4) > Rational(-5, 6));
+	CHECK(Rational(-3, 4) >= Rational(-5, 6));
+	CHECK(Rational(-5, 6) < Rational(-3, 4));
+	CHECK(Rational(-5, 6) <= Rational(-3, 4));
 }
 
 TEST_CASE("aritmetics with positive numbers") {
@@ -55,26 +61,47 @@ TEST_CASE("aritmetics with positive numbers") {
 	CHECK(t == Rational(24, 35));
 	t /= h;
 	CHECK(t == Rational(6, 7));
-	///Реализовать операторы -=, +=, *=, /= для всех видов арифметики как написано выше(Только для тестов).
+	Rational a(45, 6);
+	a++;
+	CHECK(a == Rational(17, 2));
+	a--;
+	CHECK(a == Rational(45, 6));
+	++a;
+	CHECK(a == Rational(17, 2));
+	--a;
+	CHECK(a == Rational(45, 6));
 }
 
 TEST_CASE("aritmetics with negative numbers") {
 	Rational t(-6, 7);
 	Rational h(4, 5);
-	CHECK(t + h == Rational(2, 35));
+	CHECK(t + h == Rational(-2, 35));
 	CHECK(t - h == Rational(-58, 35));
 	CHECK(t * h == Rational(-24, 35));
 	CHECK(t / h == Rational(-15, 14));
+	t += h;
+	CHECK(t == Rational(-2, 35));
+	t -= h;
+	CHECK(t == Rational(-6, 7));
+	t *= h;
+	CHECK(t == Rational(-24, 35));
+	t /= h;
+	CHECK(t == Rational(-6, 7));
+	Rational a(-45, 6);
+	a++;
+	CHECK(a == Rational(-13, 2));
+	a--;
+	CHECK(a == Rational(-45, 6));
+	++a;
+	CHECK(a == Rational(-13, 2));
+	--a;
+	CHECK(a == Rational(-45, 6));
 }
 
-//TEST_CASE("Rational input/output") {
-//	Rational t(1, 2);
-//	std::ostringstream output;
-//	output << t;
-//	CHECK(output.str() == "1/2");
-//	Rational m;
-//	std::istringstream input("5");
-//	input >> m;
-//	CHECK(m == Rational(5, 3));
-//}
+TEST_CASE("Rational input/output") {
+	Rational t(1, 2);
+	std::ostringstream output;
+	output << t;
+	CHECK(output.str() == "1/2");
+}
 

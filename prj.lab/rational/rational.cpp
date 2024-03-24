@@ -38,7 +38,7 @@ Rational::Rational(const std::int64_t num, const std::int64_t den):num_(num), de
 }
 
 bool Rational::operator==(const Rational& rhs) const noexcept {
-    if (this->num_ / this->den_ == rhs.num_ / rhs.den_) {
+    if (this->num_ * rhs.den_ == rhs.num_ * this->den_) {
         return true;
     }
     else {
@@ -54,7 +54,7 @@ bool Rational::operator!=(const Rational& rhs) const noexcept {
     }
 }
 bool Rational::operator<(const Rational& rhs) const noexcept { 
-    if (this->num_ / this->den_ < rhs.num_ / rhs.den_) {
+    if ((this->num_ * rhs.den_) < (rhs.num_ * this->den_)) {
         return true;
     }
     else {
@@ -62,23 +62,23 @@ bool Rational::operator<(const Rational& rhs) const noexcept {
     }
 }
 bool Rational::operator<=(const Rational& rhs) const noexcept { 
-    if (this < &rhs or this == &rhs) {
+    if (((this->num_ * rhs.den_) < (rhs.num_ * this->den_)) or (this->num_ * rhs.den_ == rhs.num_ * this->den_)) {
         return true;
     }
     else {
         return false;
     }
 }
-bool Rational::operator>(const Rational& rhs) const noexcept { 
-    if (this <= &rhs) {
-        return false;
+bool Rational::operator>(const Rational& rhs) const noexcept {
+    if ((this->num_ * rhs.den_) > (rhs.num_ * this->den_)) {
+        return true;
     }
     else {
-        return true;
+        return false;
     }
 }
 bool Rational::operator>=(const Rational& rhs) const noexcept { 
-    if (this < &rhs) {
+    if (((this->num_ * rhs.den_) < (rhs.num_ * this->den_) or (this->num_ * rhs.den_ == rhs.num_ * this->den_))) {
         return false;
     }
     else {
@@ -141,6 +141,30 @@ Rational operator-(const int64_t lhs, const Rational& rhs) noexcept { return ope
 Rational operator*(const int64_t lhs, const Rational& rhs) noexcept { return operator+(rhs, lhs); }
 Rational operator/(const int64_t lhs, const Rational& rhs) { return operator+(rhs, lhs); }
 
+Rational& Rational::operator++() {
+    num_ += den_;
+    return *this;
+}
+
+Rational& Rational::operator++(int) {
+    Rational temp = *this;
+    ++(*this);
+    return temp;
+}
+
+Rational& Rational::operator--() {
+    num_ -= den_;
+    return *this;
+}
+
+Rational& Rational::operator--(int) {
+    Rational temp = *this;
+    --(*this);
+    return temp;
+}
+
+
+
 std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
     std::int64_t numerator(0);
     char comma(0);
@@ -148,10 +172,8 @@ std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
     istrm >> numerator >> comma >> denominator;
     if (istrm.good()) {
         if ((Rational::separator == comma) and (denominator != 0)) {
-            //std::cout << numerator << comma << denominator;
             num_ = numerator;
             den_ = denominator;
-            //std::cout << this->num_ << " " << this->den_;
         }
         else if (denominator == 0) {
             throw std::invalid_argument("Zero denumenator in Rational ctor");
