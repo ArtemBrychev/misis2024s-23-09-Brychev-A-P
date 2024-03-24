@@ -27,8 +27,8 @@ Rational::Rational(const std::int64_t num, const std::int64_t den):num_(num), de
   }
   else {
       if (den < 0) {
-          num_ = -1 * num / nod(num, den);
-          den_ = -1 * den / nod(num, den);
+          num_ = -1 * num / nod(-1 * num, -1 * den);
+          den_ = -1 * den / nod(-1 * num, -1 * den);
       }
       else {
           num_ = num / nod(num, den);

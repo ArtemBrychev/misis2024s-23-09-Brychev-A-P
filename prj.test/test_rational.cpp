@@ -28,11 +28,11 @@ TEST_CASE("rational ctor") {
 TEST_CASE("Small functions") {
 	Rational r(-5, 7);
 	CHECK(-5 == r.num());
-	CHECK(7 == r.
+	CHECK(7 == r.den());
 
-	/*Rational h(5, -7);
+	Rational h(5, -7);
 	CHECK(-5 == h.num());
-	CHECK(7 == h.den());*/
+	CHECK(7 == h.den());
 
 	Rational k(5, 20);
 	CHECK(1 == k.num());
@@ -49,6 +49,12 @@ TEST_CASE("aritmetics with positive numbers") {
 	CHECK(t / h == Rational(15, 14));
 	t += h;
 	CHECK(t == Rational(58, 35));
+	t -= h;
+	CHECK(t == Rational(6, 7));
+	t *= h;
+	CHECK(t == Rational(24, 35));
+	t /= h;
+	CHECK(t == Rational(6, 7));
 	///Реализовать операторы -=, +=, *=, /= для всех видов арифметики как написано выше(Только для тестов).
 }
 
