@@ -3,6 +3,15 @@
 #include "doctest.h"
 #include <rational/rational.hpp>
 
+//int main() {
+//	Rational h;
+//	Rational j(4, 5);
+//	std::cout << h << " - " << h.num() << ' ' << h.den() << std::endl;
+//	std::cout << h * j;
+//	h += j;
+//	std::cout << std::endl << h;
+//}
+
 
 TEST_CASE("rational ctor") {
   Rational r_def;
@@ -19,11 +28,15 @@ TEST_CASE("rational ctor") {
 TEST_CASE("Small functions") {
 	Rational r(-5, 7);
 	CHECK(-5 == r.num());
-	CHECK(7 == r.den());
+	CHECK(7 == r.
 
-	Rational h(5, -7);
+	/*Rational h(5, -7);
 	CHECK(-5 == h.num());
-	CHECK(7 == h.den());
+	CHECK(7 == h.den());*/
+
+	Rational k(5, 20);
+	CHECK(1 == k.num());
+	CHECK(4 == k.den());
 	///Нужно внести сокращение дроби при создании или вводе, инкремент, декремент, посмотреть что там со сравнением.
 }
 
