@@ -27,12 +27,12 @@ Rational::Rational(const std::int64_t num, const std::int64_t den):num_(num), de
   }
   else {
       if (den < 0) {
-          num_ = -1 * num;
-          den_ = -1 * den;
+          num_ = -1 * num / nod(num, den);
+          den_ = -1 * den / nod(num, den);
       }
       else {
-          num_ = num;
-          den_ = den;
+          num_ = num / nod(num, den);
+          den_ = den / nod(num, den);
       }
   }
 }
@@ -164,14 +164,8 @@ std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
 }
 
 std::ostream& Rational::WriteTo(std::ostream& ostrm) const noexcept {
-    if (num_ >= 0) {
-        ostrm << num_ << separator << den_;
-        return ostrm;
-    }
-    else {
-        ostrm << num_ << separator << den_;
-        return ostrm;
-    }
+    ostrm << num_ << separator << den_;
+    return ostrm;
 }
 
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept {
