@@ -6,6 +6,12 @@
 
 Complex Complex::operator-() const noexcept { return Complex(-re, -im); }
 
+bool Complex::operator==(const Complex& rhs) const noexcept {
+	return (std::abs(re - rhs.re) <= minDiff) && (std::abs(im - rhs.im) <= minDiff);;
+}
+
+bool Complex::operator==(const double& rhs) const { return (std::abs(re - rhs) <= minDiff) && (std::abs(im) <= minDiff);; }
+
 Complex& Complex::operator+=(const Complex& rhs) noexcept {
 	this->re = this->re + rhs.re;
 	this->im = this->im + rhs.im;
