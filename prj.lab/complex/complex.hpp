@@ -41,12 +41,10 @@ struct Complex {
 	//!
 	//! Два комплексных числа считаются равными, если модуль разности
 	//! вещественных и мнимых частей не превосходит eps = 2 * std::numeric_limits<double>::epsilon()
-	[[nodiscard]] bool operator==(const Complex& rhs) const noexcept {
-		return (std::abs(re - rhs.re) <= minDiff) && (std::abs(im - rhs.im) <= minDiff);;
-	}
+	[[nodiscard]] bool operator==(const Complex& rhs) const noexcept;
 
 	//! \brief Сравнение комплексных чисел на неравенство. \sa Complex::operator==
-	[[nodiscard]] bool operator==(const double& rhs) const { return (std::abs(re - rhs) <= minDiff) && (std::abs(im) <= minDiff);; }
+	[[nodiscard]] bool operator==(const double& rhs) const;
 
 	bool operator!=(const Complex& rhs) const { return !operator==(rhs); }
 
