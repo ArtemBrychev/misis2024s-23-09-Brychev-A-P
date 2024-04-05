@@ -1,0 +1,8 @@
+CMake Error at prj.lab/CMakeLists.txt:3 (add_subdirectory):
+  The source directory
+
+    D:/.dima/misis2023f-23-check/misis2024s-23-09-Brychev-A-P/prj.lab/StackArrT
+
+  does not contain a CMakeLists.txt file.
+
+
