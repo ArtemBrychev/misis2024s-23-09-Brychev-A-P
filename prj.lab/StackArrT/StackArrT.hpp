@@ -4,17 +4,18 @@
 #include <iostream>
 #include <cstddef>
 #include <stdexcept>
+#include <initializer_list>
 
 
 template <typename T>
 class StackArrT {
 public:
-	StackArrT();
-	~StackArrT();
+	StackArrT() = default;//
+	~StackArrT();//
 	StackArrT(std::ptrdiff_t rhs);//
 	StackArrT(const StackArrT<T>& other);//
-	StackArrT(StackArrT<T>&& other);
-	///StackArrT(const std::initializer_list<T>& list);
+	StackArrT(StackArrT<T>&& other);//
+	StackArrT(const std::initializer_list<T>& list);//
 
 	void push(const T& value);//
 	void pop();//
@@ -52,24 +53,48 @@ StackArrT<T>::StackArrT(const StackArrT<T>& other) {
 }
 
 template <typename T>
+StackArrT<T>::StackArrT(StackArrT<T>&& other) {
+	data_ = other.data_;
+	i_top_ = other.i_top_;
+	size_ = other.size_;
+}
+
+template <typename T>
+StackArrT<T>::StackArrT(const std::initializer_list<T>& list) {
+	size_ = list.size();
+	i_top_ = size_ - 1;
+	data_ = new T[size_];
+	std::copy(list.begin(), list.end(), data_);
+}
+
+template <typename T>
 std::ptrdiff_t StackArrT<T>::size() const {
 	return size_;
 }
 
 template <typename T>
 StackArrT<T>::~StackArrT() {
+	size_ = 0;
+	i_top_ = -1;
 	delete[] data_;
 	data_ = nullptr;
 }
 
 template <typename T>
 void StackArrT<T>::push(const T& value) {
+	if (size_ == 0) {
+		size_ = 1;
+		data_ = new T[size_];
+	}
 	if (i_top_ + 1 < size_) {
 		data_[i_top_ + 1] = value;
 		i_top_ += 1;
 	}
 	else {
-		throw std::invalid_argument("Stack overflow");
+		size_ *= 2;
+		T* temp = new T[size_];
+		delete[] data_;
+		data_ = temp;
 	}
 }
 
@@ -144,11 +169,34 @@ bool StackArrT<T>::operator!=(const StackArrT<T>& other) const {
 
 template <typename T>
 void StackArrT<T>::swap(StackArrT<T>& other) {
-	T* temp = new T[i_top_];
-	for (int i = 0; i <= i_top_; i++) {
-		temp[i] = data_[i];
-	}
-
+	std::swap(data_, other.data_);
+	std::swap(i_top_, other.i_top_);
+	std::swap(size_, other.size_);
 }
+
+template <typename T> void StackArrT<T>::merge(StackArrT<T>& other) {
+	if (empty()) {
+		this->swap(other);
+	}
+	else {
+		T* tmp = new T[size_ + other.size_];
+		for (int i = 0; i < i_top_ + 1; ++i) {
+			tmp[i] = data_[i];
+		}
+		for (int i = 0; i < other.i_top_ + 1; ++i) {
+			tmp[i_top_ + 1 + i] = other.data_[i];
+		}
+		size_ += other.size_;
+		i_top_ += other.i_top_ + 1;
+
+		delete[] other.data_;
+		other.data_ = nullptr;
+		other.i_top_ = -1;
+		other.size_ = 0;
+
+		delete[] data_;
+		data_ = tmp;
+	}
+};
 
 #endif
