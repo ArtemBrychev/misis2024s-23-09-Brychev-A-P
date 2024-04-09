@@ -3,7 +3,7 @@
 #define DOUBLELISTQUEUE_HPP
 #include <stdexcept> 
 
-class DoubleListQueue{
+class DoubleListQueue {
 public:
 	DoubleListQueue() = default;
 	int top();
@@ -18,7 +18,7 @@ private:
 		int value;
 		Node* prev;
 		Node* next;
-		Node(int val){
+		Node(int val) {
 			value = val;
 			prev = nullptr;
 			next = nullptr;
@@ -27,7 +27,7 @@ private:
 	Node* frontNode;
 	Node* backNode;
 
-}
+};
 
 /*Реализвция класса начинается здесь: */
 
