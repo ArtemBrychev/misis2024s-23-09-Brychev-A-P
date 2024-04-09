@@ -174,29 +174,29 @@ void StackArrT<T>::swap(StackArrT<T>& other) {
 	std::swap(size_, other.size_);
 }
 
-template <typename T> void StackArrT<T>::merge(StackArrT<T>& other) {
-	if (empty()) {
-		this->swap(other);
-	}
-	else {
-		T* tmp = new T[size_ + other.size_];
-		for (int i = 0; i < i_top_ + 1; ++i) {
-			tmp[i] = data_[i];
-		}
-		for (int i = 0; i < other.i_top_ + 1; ++i) {
-			tmp[i_top_ + 1 + i] = other.data_[i];
-		}
-		size_ += other.size_;
-		i_top_ += other.i_top_ + 1;
-
-		delete[] other.data_;
-		other.data_ = nullptr;
-		other.i_top_ = -1;
-		other.size_ = 0;
-
-		delete[] data_;
-		data_ = tmp;
-	}
-};
+//template <typename T> void StackArrT<T>::merge(StackArrT<T>& other) {
+//	if (empty()) {
+//		this->swap(other);
+//	}
+//	else {
+//		T* tmp = new T[size_ + other.size_];
+//		for (int i = 0; i < i_top_ + 1; ++i) {
+//			tmp[i] = data_[i];
+//		}
+//		for (int i = 0; i < other.i_top_ + 1; ++i) {
+//			tmp[i_top_ + 1 + i] = other.data_[i];
+//		}
+//		size_ += other.size_;
+//		i_top_ += other.i_top_ + 1;
+//
+//		delete[] other.data_;
+//		other.data_ = nullptr;
+//		other.i_top_ = -1;
+//		other.size_ = 0;
+//
+//		delete[] data_;
+//		data_ = tmp;
+//	}
+//};
 
 #endif
