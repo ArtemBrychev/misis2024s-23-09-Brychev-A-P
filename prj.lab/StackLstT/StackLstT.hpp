@@ -20,6 +20,10 @@ public:
     void swap(StackLstT<T>& other);
     void merge(StackLstT<T>& other);
 
+    //don't forget to delete this function:
+    void display();
+    //for test purpose only.
+
     bool empty() const;
     std::ptrdiff_t size() const;//
 
@@ -69,22 +73,15 @@ T& StackLstT<T>::top() const {
     return top;
 }
 
+//but i really want to keep it.
 template <typename T>
-void StackLstT<T>::pop() {
-    int i = 0;
-    T temp;
-    Node* pointer_index = head_;
-    while (i <= size_ - 2) {
-        if (i != size_ - 2) {
-            Node* temp = pointer_index->next;
-            Node* prev = 
-            pointer_index = temp;
-        }
-        else {
-            tail_ = pointer_index;
-            tail_->next = nullptr;
-        }
+void StackLstT<T>::display() {
+    Node* temp = head_;
+    while (temp->next != nullptr) {
+        std::cout << temp->value << ' ';
+        temp = temp->next;
     }
+    std::cout << temp->value << std::endl;
 }
 
 #endif 
