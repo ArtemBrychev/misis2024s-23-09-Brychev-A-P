@@ -15,16 +15,16 @@ public:
     StackLstT(const std::initializer_list<T>& list);
 
     void push(const T& value);//
-    void pop();
+    void pop();//
     T& top() const;//
     void swap(StackLstT<T>& other);
     void merge(StackLstT<T>& other);
 
-    //don't forget to delete this function:
+    //don't forget to delete this function-*
     void display();
     //for test purpose only.
 
-    bool empty() const;
+    bool empty() const;//
     std::ptrdiff_t size() const;//
 
     bool operator==(const StackLstT<T>& rhs) const;
@@ -76,12 +76,40 @@ T& StackLstT<T>::top() const {
 //but i really want to keep it.
 template <typename T>
 void StackLstT<T>::display() {
+    std::cout << "Stack size is: " << size() << ". And it contains: ";
     Node* temp = head_;
     while (temp->next != nullptr) {
         std::cout << temp->value << ' ';
         temp = temp->next;
     }
     std::cout << temp->value << std::endl;
+}
+//I won't.
+
+template <typename T>
+void StackLstT<T>::pop() {
+    Node* temp = head_;
+    while (temp->next != tail_) {
+        temp = temp->next;
+    }
+    delete tail_;
+    size_ -= 1;
+    temp->next = nullptr;
+    tail_ = temp;
+}
+
+template <typename T>
+bool StackLstT<T>::empty() const {
+    if(size_ == 0){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+template <typename T>
+bool StackLstT<T>::operator==(const StackLstT<T>& other) const{
 }
 
 #endif 
