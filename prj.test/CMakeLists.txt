@@ -2,12 +2,10 @@ add_executable(test_complex test_complex.cpp)
 add_executable(test_rational test_rational.cpp)
 add_executable(test_StackArrT test_StackArrT.cpp)
 add_executable(test_StackLstT test_StackLstT.cpp)
-add_executable(test_DoubleListQueue test_DoubleListQueue.cpp)
 target_link_libraries(test_complex complex)
 target_link_libraries(test_rational rational)
 target_link_libraries(test_StackArrT StackArrT)
 target_link_libraries(test_StackLstT StackLstT)
-target_link_libraries(test_DoubleListQueue DoubleListQueue)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_stackarr)
 

@@ -38,6 +38,8 @@ TEST_CASE("Creating stacks") {
 	StackArrT<std::string> j(3);
 	j.push("This can go fuck itself");
 	j.push("Sorry for bad words");
-	j = h;
- 	CHECK(j.top() == "Hello, world!");
+	b.push("Hate it");
+	j.merge(b);
+	CHECK(j.top() == "Hate it");
+	h.push("Hello, world!");
 }
