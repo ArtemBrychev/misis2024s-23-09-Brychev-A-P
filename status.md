@@ -1,10 +1,10 @@
-CHECK: 20240406-020952
+CHECK: 20240414-215549
 ERROR: lab complex - test build failed
-ERROR: lab complex_io - test build failed
-ERROR: lab complex_m - test build failed
-ERROR: lab rational - test build failed
-ERROR: lab rational_io - test build failed
-ERROR: lab rational_m - test build failed
+STATUS: lab complex_io - test-ok
+STATUS: lab complex_m - test-failed
+STATUS: lab rational - test-ok
+STATUS: lab rational_io - test-failed
+STATUS: lab rational_m - test-ok
 ERROR: lab dynarr - test build failed
 ERROR: lab dynarr_m - test build failed
 ERROR: lab stackarr - test build failed
