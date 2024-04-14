@@ -36,10 +36,4 @@ int main() {
 	Stack2.push(65);
 	std::cout << Stack2.top() << ' ' << Stack2.size() << std::endl;
 	Stack2.display();
-	if (Stack == Stack2) {
-		std::cout << "Ura pobeda";
-	}
-	else {
-		std::cout << "huy";
-	}
 }

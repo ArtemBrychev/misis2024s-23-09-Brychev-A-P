@@ -27,10 +27,10 @@ public:
     bool empty() const;//
     std::ptrdiff_t size() const;//
 
-    bool operator==(const StackLstT<T>& rhs) const;
-    bool operator!=(const StackLstT<T>& rhs) const;
+    bool operator==(const StackLstT<T>& rhs) const;//
+    bool operator!=(const StackLstT<T>& rhs) const;//
 
-    StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;
+    StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;//
     StackLstT<T>& operator=(StackLstT<T>&& other);
 
 private:
@@ -109,7 +109,75 @@ bool StackLstT<T>::empty() const {
 }
 
 template <typename T>
-bool StackLstT<T>::operator==(const StackLstT<T>& other) const{
+bool StackLstT<T>::operator==(const StackLstT<T>& rhs) const {
+    if (size_ != rhs.size_) {
+        return false;
+    }
+
+    Node* curr_lhs = head_;
+    Node* curr_rhs = rhs.head_;
+    while (curr_lhs) {
+        if (curr_lhs->value != curr_rhs->value) {
+            return false;
+        }
+        curr_lhs = curr_lhs->next;
+        curr_rhs = curr_rhs->next;
+    }
+
+    return true;
 }
 
+template <typename T>
+bool StackLstT<T>::operator!=(const StackLstT<T>& rhs) const {
+    return !(*this == rhs);
+}
+
+template <typename T>
+StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& rhs) noexcept {
+    if (this != &rhs) {
+        Node* curr = head_;
+        while (curr) {
+            Node* temp = curr;
+            curr = curr->next;
+            delete temp;
+        }
+
+        size_ = 0;
+
+        curr = rhs.head_;
+        while (curr) {
+            push(curr->value);
+            curr = curr->next;
+        }
+    }
+    return *this;
+}
+template <typename T>
+void StackLstT<T>::swap(StackLstT<T>& other) {
+    std::swap(head_, other.head_);
+    std::swap(tail_, other.tail_);
+    std::swap(size_, other.size_);
+}
+
+template <typename T>
+void StackLstT<T>::merge(StackLstT<T>& other) {
+    if (other.size_ == 0) {
+        return;
+    }
+
+    if (size_ == 0) {
+        head_ = other.head_;
+        tail_ = other.tail_;
+        size_ = other.size_;
+    }
+    else {
+        tail_->next = other.head_;
+        tail_ = other.tail_;
+        size_ += other.size_;
+    }
+
+    other.head_ = nullptr;
+    other.tail_ = nullptr;
+    other.size_ = 0;
+}
 #endif 
