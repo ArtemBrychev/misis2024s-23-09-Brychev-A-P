@@ -69,7 +69,7 @@ StackArrT<T>::StackArrT(const std::initializer_list<T>& list) {
 
 template <typename T>
 std::ptrdiff_t StackArrT<T>::size() const {
-	return size_;
+	return i_top_ + 1;
 }
 
 template <typename T>
@@ -82,20 +82,17 @@ StackArrT<T>::~StackArrT() {
 
 template <typename T>
 void StackArrT<T>::push(const T& value) {
-	if (size_ == 0) {
-		size_ = 1;
+	if (empty()) {
+		size_ = 8;
 		data_ = new T[size_];
 	}
-	if (i_top_ + 1 < size_) {
-		data_[i_top_ + 1] = value;
-		i_top_ += 1;
-	}
-	else {
+	else if (size_ == i_top_ + 1) {
 		size_ *= 2;
 		T* temp = new T[size_];
 		delete[] data_;
 		data_ = temp;
 	}
+	data_[++i_top_] = value;
 }
 
 template <typename T>
@@ -105,7 +102,6 @@ T& StackArrT<T>::top() const{
 
 template <typename T>
 void StackArrT<T>::pop() {
-	int h = i_top_;
 	i_top_ -= 1;
 }
 

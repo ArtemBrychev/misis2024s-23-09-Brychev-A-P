@@ -3,43 +3,28 @@
 #include "doctest.h"
 #include <StackArrT/StackArrT.hpp>
 
-//int main() {
-//	StackArrT<int> a(4);
-//	StackArrT<std::string> b(3);
-//	b.push("Hello, world!");
-//	b.push("by by");
-//	b.pop();
-//	StackArrT<std::string> h(3);
-//	h = b;
-//	StackArrT<std::string> j(3);
-//	j.push("This can go fuck itself");
-//	j.push("Sorry for bad words");
-//	j.swap(h);
-//	std::cout << "Last try " << j.top();
-//	
-//}
-
-TEST_CASE("Creating stacks") {
-	StackArrT<int> a(4);
-	CHECK(4 == a.size());
-	CHECK(a.empty() == true);
-	StackArrT<std::string> b(3);
+TEST_CASE("Stack with int") {
+	StackArrT<int> a;
+	a.push(6);
+	CHECK(1 == a.size());
+	CHECK(6 == a.top());
+	a.push(7);
+	CHECK(2 == a.size());
+	CHECK(7 == a.top());
+	a.pop();
+	CHECK(1 == a.size());
+	CHECK(6 == a.top());
+	a.push(-4);
+	CHECK(2 == a.size());
+	CHECK(-4 == a.top());
+	a.push(78);
+	CHECK(3 == a.size());
+	CHECK(78 == a.top());
+	StackArrT<int> b(a);
 	CHECK(3 == b.size());
-	CHECK(b.empty() == true);
-	b.push("Hello, world!");
-	CHECK(b.top() == "Hello, world!");
-	CHECK(b.empty() == false);
-	b.push("by by");
-	b.pop();
-	CHECK(b.top() == "Hello, world!");
-	StackArrT<std::string> h(3);
-	h = b;
-	CHECK(h.top() == "Hello, world!");
-	StackArrT<std::string> j(3);
-	j.push("This can go fuck itself");
-	j.push("Sorry for bad words");
-	b.push("Hate it");
-	j.merge(b);
-	CHECK(j.top() == "Hate it");
-	h.push("Hello, world!");
+	CHECK(78 == b.top());
+	StackArrT<int> h;
+	h = a;
+	CHECK(3 == h.size());
+	CHECK(78 == h.top());
 }
