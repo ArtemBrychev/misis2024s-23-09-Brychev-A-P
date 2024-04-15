@@ -14,23 +14,23 @@ public:
     StackLstT(StackLstT<T>&& other);
     StackLstT(const std::initializer_list<T>& list);
 
-    void push(const T& value);//
-    void pop();//
-    T& top() const;//
+    void push(const T& value);
+    void pop();
+    T& top() const;
     void swap(StackLstT<T>& other);
     void merge(StackLstT<T>& other);
 
-    //don't forget to delete this function-*
+    //don't forget to delete this function
     void display();
     //for test purpose only.
 
-    bool empty() const;//
-    std::ptrdiff_t size() const;//
+    bool empty() const;
+    std::ptrdiff_t size() const;
 
-    bool operator==(const StackLstT<T>& rhs) const;//
-    bool operator!=(const StackLstT<T>& rhs) const;//
+    bool operator==(const StackLstT<T>& rhs) const;
+    bool operator!=(const StackLstT<T>& rhs) const;
 
-    StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;//
+    StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;
     StackLstT<T>& operator=(StackLstT<T>&& other);
 
 private:
@@ -43,6 +43,28 @@ private:
     Node* head_ = nullptr;
     Node* tail_ = nullptr;
 };
+
+template <typename T>
+StackLstT<T>::StackLstT(const StackLstT<T>& other) {
+    Node* temp = other.head_;
+    while (temp) {
+        push(temp->value);
+        temp = temp->next;
+    }
+}
+
+template <typename T>
+StackLstT<T>::StackLstT(StackLstT<T>&& other) {
+    head_ = other.head_;
+    tail_ = other.tail_;
+    size_ = other.size_;
+}
+template <typename T>
+StackLstT<T>::StackLstT(const std::initializer_list<T>& list) {
+    for (auto x : list) {
+        push(x);
+    }
+}
 
 template <typename T>
 void StackLstT<T>::push(const T& value) {
@@ -69,11 +91,10 @@ std::ptrdiff_t StackLstT<T>::size() const {
 
 template <typename T>
 T& StackLstT<T>::top() const {
-    T top = tail_->value;
-    return top;
+    return tail_->value;
 }
 
-//but i really want to keep it.
+//I really want to keep this function.
 template <typename T>
 void StackLstT<T>::display() {
     std::cout << "Stack size is: " << size() << ". And it contains: ";
@@ -84,7 +105,7 @@ void StackLstT<T>::display() {
     }
     std::cout << temp->value << std::endl;
 }
-//I won't.
+//And I will.
 
 template <typename T>
 void StackLstT<T>::pop() {
@@ -152,6 +173,7 @@ StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& rhs) noexcept {
     }
     return *this;
 }
+
 template <typename T>
 void StackLstT<T>::swap(StackLstT<T>& other) {
     std::swap(head_, other.head_);
