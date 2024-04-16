@@ -90,9 +90,11 @@ std::ptrdiff_t StackLstT<T>::size() const {
 }
 
 template <typename T>
-T& StackLstT<T>::top() const {
-    return tail_->value;
+T& StackLstT<T>::top() const{
+    T& top = tail_->value;
+    return top;
 }
+
 
 //I really want to keep this function.
 template <typename T>
