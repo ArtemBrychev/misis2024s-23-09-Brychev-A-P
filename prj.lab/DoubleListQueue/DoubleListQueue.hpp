@@ -9,11 +9,11 @@ template <typename T>
 class DoubleListQueue {
 public:
 	DoubleListQueue() = default;
-	T top();//
-	void push(T);//
-	int getSize();//
-	T getFront();//
-	T getBack();//
+	T top();
+	void push(T);
+	int getSize();
+	T getFront();
+	T getBack();
 
 private:
 	int size_ = 0;
