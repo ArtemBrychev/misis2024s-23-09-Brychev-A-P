@@ -1,13 +1,12 @@
-#pragma once
 #ifndef STACKLSTT_HPP
 #define STACKLSTT_HPP
+#include "iStack/IStackBase.hpp"
 #include <iostream>
 #include <cstddef>
 #include <stdexcept>
 
-
 template <typename T>
-class StackLstT {
+class StackLstT : public IStakBase<T> {
 public:
     StackLstT() = default;
     ~StackLstT() = default;
@@ -20,10 +19,6 @@ public:
     T& top() const;
     void swap(StackLstT<T>& other);
     void merge(StackLstT<T>& other);
-
-    //don't forget to delete this function
-    void display();
-    //for test purpose only.
 
     bool empty() const;
     std::ptrdiff_t size() const;
@@ -91,24 +86,10 @@ std::ptrdiff_t StackLstT<T>::size() const {
 }
 
 template <typename T>
-T& StackLstT<T>::top() const{
+T& StackLstT<T>::top() const {
     T& top = tail_->value;
     return top;
 }
-
-
-//I really want to keep this function.
-template <typename T>
-void StackLstT<T>::display() {
-    std::cout << "Stack size is: " << size() << ". And it contains: ";
-    Node* temp = head_;
-    while (temp->next != nullptr) {
-        std::cout << temp->value << ' ';
-        temp = temp->next;
-    }
-    std::cout << temp->value << std::endl;
-}
-//And I will.
 
 template <typename T>
 void StackLstT<T>::pop() {
@@ -120,7 +101,7 @@ void StackLstT<T>::pop() {
         delete tail_;
         size_ -= 1;
         temp->next = nullptr;
-            tail_ = temp;
+        tail_ = temp;
     }
     else if (size_ == 1) {
         size_ = 0;
@@ -134,7 +115,7 @@ void StackLstT<T>::pop() {
 
 template <typename T>
 bool StackLstT<T>::empty() const {
-    if(size_ == 0){
+    if (size_ == 0) {
         return true;
     }
     else {
@@ -215,4 +196,7 @@ void StackLstT<T>::merge(StackLstT<T>& other) {
     other.tail_ = nullptr;
     other.size_ = 0;
 }
-#endif 
+
+
+#endif
+

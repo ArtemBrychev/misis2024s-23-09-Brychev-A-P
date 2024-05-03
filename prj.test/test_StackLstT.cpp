@@ -115,3 +115,14 @@ TEST_CASE("Stack with double") {
 	CHECK(78.7 == h.top());
 }
 
+TEST_CASE("shit that dont work") {
+	StackLstT<int> stack = { 1, 2, 3 };
+	CHECK(stack.top() == 3);
+	CHECK(stack.size() == 3);
+	int i = 3;
+	while (!stack.empty()) {
+		CHECK(stack.top() == i);
+		stack.pop();
+		--i;
+	}
+}
