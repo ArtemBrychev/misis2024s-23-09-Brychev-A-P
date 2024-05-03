@@ -15,22 +15,22 @@ struct TreeNode {
 class BinarySearchTree {
 public:
     // Конструктор
-    BinarySearchTree() = default;
+    BinarySearchTree() = default;//
 
     // Деструктор
-    ~BinarySearchTree() = default;
+    ~BinarySearchTree() = default;//
 
     // Метод для получения корневого узла дерева
-    TreeNode* root();
+    TreeNode* root();//
 
     // Метод для добавления узла в дерево
-    void add(int data);
+    void add(int data);//
 
     // Метод для проверки наличия узла в дереве
-    bool has(int data);
+    bool has(int data);//
 
     // Метод для поиска узла в дереве
-    TreeNode* find(int data);
+    TreeNode* find(int data);//
 
     // Метод для удаления узла из дерева
     void remove(int data);
@@ -40,10 +40,10 @@ public:
     // если есть оба - минимальный узел в правом поддереве заменяет текущую
 
     // Метод для нахождения минимального значения в дереве
-    int min();
+    int min();//
 
     // Метод для нахождения максимального значения в дереве
-    int max();
+    int max();//
 
 private:
     TreeNode* root_;
@@ -90,5 +90,55 @@ void BinarySearchTree::add(int rhs) {
         }
     }
 }
+
+bool BinarySearchTree::has(int rhs) {
+    TreeNode* temp = root_;
+    bool answer = false;
+    while (temp != nullptr) {
+        if (rhs == temp->data) {
+            return true;
+        }
+        else if (rhs > temp->data) {
+            temp = temp->right;
+        }
+        else if (rhs < temp->data) {
+            temp = temp->left;
+        }
+    }
+    return answer;
+}
+
+TreeNode* BinarySearchTree::find(int rhs) {
+    TreeNode* temp = root_;
+    bool answer = false;
+    while (temp != nullptr) {
+        if (rhs == temp->data) {
+            return temp;
+        }
+        else if (rhs > temp->data) {
+            temp = temp->right;
+        }
+        else if (rhs < temp->data) {
+            temp = temp->left;
+        }
+    }
+}
+
+int BinarySearchTree::min() {
+    TreeNode* temp = root_;
+    while (temp->left != nullptr) {
+        temp = temp->left;
+    }
+    return temp->data;
+}
+
+int BinarySearchTree::max() {
+    TreeNode* temp = root_;
+    while (temp->right != nullptr) {
+        temp = temp->right;
+    }
+    return temp->data;
+}
+
 
 #endif
