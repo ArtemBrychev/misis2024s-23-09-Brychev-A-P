@@ -51,7 +51,12 @@ private:
 };
 
 TreeNode* BinarySearchTree::root() {
-    return root_;
+    if (root_added == true) {
+        return root_;
+    }
+    else {
+        throw(std::invalid_argument("Doesn't have root"));
+    }
 }
 
 void BinarySearchTree::add(int rhs) {
@@ -92,6 +97,12 @@ void BinarySearchTree::add(int rhs) {
 }
 
 bool BinarySearchTree::has(int rhs) {
+    if (rhs == root_->data && root_added != false) {
+        return true;
+    }
+    else if (root_->data == rhs && root_added == false){
+        return false;
+    }
     TreeNode* temp = root_;
     bool answer = false;
     while (temp != nullptr) {
@@ -109,10 +120,17 @@ bool BinarySearchTree::has(int rhs) {
 }
 
 TreeNode* BinarySearchTree::find(int rhs) {
+    if (root_->data == rhs && root_added != false) {
+        return root_;
+    }
+    else if (root_->data == rhs && root_added != false){
+        throw std::invalid_argument("There is no such node");
+    }
     TreeNode* temp = root_;
     bool answer = false;
     while (temp != nullptr) {
         if (rhs == temp->data) {
+            answer = true;
             return temp;
         }
         else if (rhs > temp->data) {
@@ -121,6 +139,9 @@ TreeNode* BinarySearchTree::find(int rhs) {
         else if (rhs < temp->data) {
             temp = temp->left;
         }
+    }
+    if (answer == false) {
+        throw std::invalid_argument("There is no such node");
     }
 }
 
@@ -138,6 +159,120 @@ int BinarySearchTree::max() {
         temp = temp->right;
     }
     return temp->data;
+}
+
+void BinarySearchTree::remove(int rhs) {
+    TreeNode* needed = find(rhs);
+    if (needed->left == nullptr && needed->right == nullptr) {
+        /*Случай: лист*/
+        TreeNode* temp = root_;
+        if (needed == root_) {
+            root_added = false;
+        }
+        else {
+            while (temp->right != needed && temp->left != needed) {
+                if (rhs > temp->data) {
+                    temp = temp->right;
+                }
+                else if(rhs < temp->data){
+                    temp = temp->left;
+                }
+            }
+            if (temp->left == needed) {
+                temp->left = nullptr;
+                delete needed;
+            }
+            else if(temp->right == needed){
+                temp->right = nullptr;
+                delete needed;
+            }
+        }
+    }
+    else if (needed->left != nullptr && needed->right == nullptr) {
+        /*Случай: есть нода справа*/
+        TreeNode* temp = root_;
+        if (needed == root_) {
+            root_ = root_->left;
+        }
+        else {
+            while (temp->right != needed && temp->left != needed) {
+                if (rhs > temp->data) {
+                    temp = temp->right;
+                }
+                else if (rhs < temp->data) {
+                    temp = temp->left;
+                }
+            }
+            if (temp->left == needed) {
+                temp->left = needed->left;
+                delete needed;
+            }
+            else if (temp->right == needed) {
+                temp->right = needed->left;
+                delete needed;
+            }
+        }
+    }
+    else if (needed->left == nullptr && needed->right != nullptr) {
+        /*Случай: есть нода слева*/
+        TreeNode* temp = root_;
+        if (needed == root_) {
+            root_ = root_->left;
+        }
+        else {
+            while (temp->right != needed && temp->left != needed) {
+                if (rhs > temp->data) {
+                    temp = temp->right;
+                }
+                else if (rhs < temp->data) {
+                    temp = temp->left;
+                }
+            }
+            if (temp->left == needed) {
+                temp->left = needed->right;
+                delete needed;
+            }
+            else if (temp->right == needed) {
+                temp->right = needed->right;
+                delete needed;
+            }
+        }
+    }
+    else if (needed->left != nullptr && needed->right != nullptr) {
+        /*Слечай: есть обе ноды*/
+        if (needed == root_) {
+            TreeNode* temp = root_->right;
+            if (temp->left != nullptr) {
+                while (temp->left->left != nullptr) {
+                    temp = temp->left;
+                }
+                int fck = temp->left->data;
+                remove(temp->left->data);
+                root_->data == fck;
+            }
+            else {
+                int fck = temp->data;
+                remove(temp->data);
+                root_->data = fck;
+            }
+        }
+        else {
+            TreeNode* temp = needed->right;
+            if (temp->left != nullptr) {
+                while (temp->left->left != nullptr) {
+                    temp = temp->left;
+                }
+                int fck = temp->left->data;
+                remove(temp->left->data);
+                needed->data == fck;
+            }
+            else {
+                int fck = temp->data;
+                remove(temp->data);
+                needed->data = fck;
+            }
+        }
+    }
 }
 
 
