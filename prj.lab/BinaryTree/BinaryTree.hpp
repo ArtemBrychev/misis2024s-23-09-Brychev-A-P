@@ -123,7 +123,7 @@ TreeNode* BinarySearchTree::find(int rhs) {
     if (root_->data == rhs && root_added != false) {
         return root_;
     }
-    else if (root_->data == rhs && root_added != false){
+    else if (root_->data == rhs && root_added == false){
         throw std::invalid_argument("There is no such node");
     }
     TreeNode* temp = root_;
@@ -189,7 +189,7 @@ void BinarySearchTree::remove(int rhs) {
         }
     }
     else if (needed->left != nullptr && needed->right == nullptr) {
-        /*Ñëó÷àé: åñòü íîäà ñïğàâà*/
+        /*Ñëó÷àé: åñòü íîäà ñëåâà*/
         TreeNode* temp = root_;
         if (needed == root_) {
             root_ = root_->left;
@@ -214,7 +214,7 @@ void BinarySearchTree::remove(int rhs) {
         }
     }
     else if (needed->left == nullptr && needed->right != nullptr) {
-        /*Ñëó÷àé: åñòü íîäà ñëåâà*/
+        /*Ñëó÷àé: åñòü íîäà ñïğàâà*/
         TreeNode* temp = root_;
         if (needed == root_) {
             root_ = root_->left;
@@ -248,7 +248,7 @@ void BinarySearchTree::remove(int rhs) {
                 }
                 int fck = temp->left->data;
                 remove(temp->left->data);
-                root_->data == fck;
+                root_->data = fck;
             }
             else {
                 int fck = temp->data;
