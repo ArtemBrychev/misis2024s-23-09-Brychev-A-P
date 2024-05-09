@@ -4,5 +4,6 @@
 #include "iStack/StackArrT(IBase).hpp"
 
 int main() {
-	/*ѕока ничего не смог сделать, особо не пон€л задание( */
+	StackLstT<int> stack;
+	stack.push(7);
 }

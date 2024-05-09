@@ -5,24 +5,19 @@
 template <typename T>
 class  IStakBase{
 public:
-	IStakBase() = default;//
-	~IStakBase();//
-	IStakBase(const IStakBase<T>& other);//
-	IStakBase(IStakBase<T>&& other);//
-	IStakBase(const std::initializer_list<T>& list);//
+    virtual void push(const T& value) = 0;
+    //virtual void pop() = 0;
+    virtual T& top() const = 0;
+    virtual void swap(IStakBase<T>& rhs);
+    //virtual void merge() = 0;
 
-	void virtual push(const T& value);//
-	void pop();//
-	T& top() const;//
-	void swap(IStakBase<T>& other);
-	void merge(IStakBase<T>& other);
+    //virtual bool empty() const = 0;
+    virtual std::ptrdiff_t size() const = 0;
 
-	bool empty() const;//
-	std::ptrdiff_t size() const;//
+    //virtual bool operator==(const IStakBase& rhs) const = 0;
+    //virtual bool operator!=(const IStakBase& rhs) const = 0;
 
-	bool operator==(const IStakBase<T>& rhs) const;//
-	bool operator!=(const IStakBase<T>& rhs) const;//
-
-	IStakBase<T>& operator=(const IStakBase<T>& rhs) noexcept;//
-	IStakBase<T>& operator=(IStakBase<T>&& other);
+    //virtual IStakBase<T>& operator=(const IStakBase& rhs) noexcept = 0;
+    //virtual IStakBase<T>& operator=(const IStakBase&& rhs) = 0;
 };
+
