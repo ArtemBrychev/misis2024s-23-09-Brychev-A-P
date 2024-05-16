@@ -61,6 +61,9 @@ TreeNode* BinarySearchTree::root() {
 
 void BinarySearchTree::add(int rhs) {
     if (root_added == false) {
+        if (root_ != nullptr) {
+            delete root_;
+        }
         TreeNode* temp = new TreeNode(rhs);
         root_ = temp;
         root_added = true;
@@ -264,7 +267,7 @@ void BinarySearchTree::remove(int rhs) {
                 }
                 int fck = temp->left->data;
                 remove(temp->left->data);
-                needed->data == fck;
+                needed->data = fck;
             }
             else {
                 int fck = temp->data;
