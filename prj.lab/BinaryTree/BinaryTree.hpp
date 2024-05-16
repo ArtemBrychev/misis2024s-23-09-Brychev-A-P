@@ -61,9 +61,6 @@ TreeNode* BinarySearchTree::root() {
 
 void BinarySearchTree::add(int rhs) {
     if (root_added == false) {
-        if (root_ != nullptr) {
-            delete root_;
-        }
         TreeNode* temp = new TreeNode(rhs);
         root_ = temp;
         root_added = true;
