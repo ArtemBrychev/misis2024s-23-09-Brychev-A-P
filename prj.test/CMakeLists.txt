@@ -7,6 +7,8 @@ add_executable(test_IStackBase test_IStackBase.cpp)
 add_executable(test_BinaryTree test_BinaryTree.cpp)
 add_executable(test_HashTable test_HashTable.cpp)
 add_executable(test_final_test test_final_test.cpp)
+add_executable(test_final_test2 test_final_test2.cpp)
+
 target_link_libraries(test_complex complex)
 target_link_libraries(test_rational rational)
 target_link_libraries(test_StackArrT StackArrT)
@@ -16,6 +18,8 @@ target_link_libraries(test_IStackBase iStack)
 target_link_libraries(test_BinaryTree BinaryTree)
 target_link_libraries(test_HashTable HashTable)
 target_link_libraries(test_final_test IContainerBase)
+target_link_libraries(test_final_test2 IContainerBase)
+
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_stackarr)
 
